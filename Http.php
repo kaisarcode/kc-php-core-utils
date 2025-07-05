@@ -79,50 +79,50 @@ class Http {
      */
     static function setHeaderCache(int $ttl = 0): void {
         $ttl === 0 ?
-        header("Cache-Control: no-cache") :
-        header("Cache-Control: max-age=$ttl");
+        @header("Cache-Control: no-cache") :
+        @header("Cache-Control: max-age=$ttl");
     }
 
     /**
      * Prevent indexing by robots
      */
     static function noRobots(): void {
-        header('X-Robots-Tag: noindex, nofollow');
+        @header('X-Robots-Tag: noindex, nofollow');
     }
 
     /**
      * Set 404 Not Found response
      */
     static function set404(): void {
-        header('HTTP/1.1 404 Not Found', true, 404);
+        @header('HTTP/1.1 404 Not Found', true, 404);
     }
 
     /**
      * Set 403 Forbidden response
      */
     static function set403(): void {
-        header('HTTP/1.1 403 Forbidden', true, 403);
+        @header('HTTP/1.1 403 Forbidden', true, 403);
     }
 
     /**
      * Set 401 Unauthorized response
      */
     static function set401(): void {
-        header('HTTP/1.1 401 Unauthorized', true, 401);
+        @header('HTTP/1.1 401 Unauthorized', true, 401);
     }
 
     /**
      * Set 400 Bad Request response
      */
     static function set400(): void {
-        header('HTTP/1.1 400 Bad Request', true, 400);
+        @header('HTTP/1.1 400 Bad Request', true, 400);
     }
 
     /**
      * Set 200 OK response
      */
     static function set200(): void {
-        header('HTTP/1.1 200 OK', true, 200);
+        @header('HTTP/1.1 200 OK', true, 200);
     }
 
     /**
@@ -133,9 +133,9 @@ class Http {
      */
     static function redirect(string $url, bool $is301 = false): void {
         if ($is301) {
-            header('HTTP/1.1 301 Moved Permanently');
+            @header('HTTP/1.1 301 Moved Permanently');
         }
-        header("Location: $url");
+        @header("Location: $url");
         exit;
     }
 
@@ -143,7 +143,7 @@ class Http {
      * Reload the current page
      */
     static function refresh(): void {
-        header("Refresh:0");
+        @header("Refresh:0");
     }
 
     /**
