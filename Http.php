@@ -7,8 +7,8 @@ class Http {
      * @param string $origin
      */
     static function allowOrigin(string $origin = '*'): void {
-        header("Access-Control-Allow-Origin: $origin");
-        header('Access-Control-Allow-Headers: Content-Type');
+        @header("Access-Control-Allow-Origin: $origin");
+        @header('Access-Control-Allow-Headers: Content-Type');
     }
 
     /**
@@ -69,7 +69,7 @@ class Http {
      * Set response header to PNG image
      */
     static function setHeaderPng(): void {
-        header("Content-Type: image/png;");
+        @header("Content-Type: image/png;");
     }
 
     /**
@@ -157,7 +157,7 @@ class Http {
             $redir = "https://".
             $_SERVER['HTTP_HOST'].
             $_SERVER['REQUEST_URI'];
-            header("Location:$redir");
+            @header("Location:$redir");
             exit;
         }
     }
@@ -174,9 +174,9 @@ class Http {
         $filename = basename($path);
         $size = filesize($path);
 
-        header("Content-Type: $mime");
-        header("Content-Disposition: attachment; filename=\"$filename\"");
-        header("Content-Length: $size");
+        @header("Content-Type: $mime");
+        @header("Content-Disposition: attachment; filename=\"$filename\"");
+        @header("Content-Length: $size");
         readfile($path);
         exit;
     }
@@ -185,11 +185,11 @@ class Http {
      * Clear browser cache
      */
     static function clearBrowserCache(): void {
-        header('Pragma: no-cache');
-        header('Cache: no-cache');
-        header('Expires: Mon, 01 Jan 1970 00:00:00 GMT');
-        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-        header("Cache-Control: post-check=0, pre-check=0", false);
+        @header('Pragma: no-cache');
+        @header('Cache: no-cache');
+        @header('Expires: Mon, 01 Jan 1970 00:00:00 GMT');
+        @header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        @header("Cache-Control: post-check=0, pre-check=0", false);
     }
 
     /**
