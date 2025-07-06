@@ -7,8 +7,8 @@ class Http {
      * @param string $origin
      */
     static function allowOrigin(string $origin = '*'): void {
-        @header("Access-Control-Allow-Origin: $origin");
-        @header('Access-Control-Allow-Headers: Content-Type');
+        header("Access-Control-Allow-Origin: $origin");
+        header('Access-Control-Allow-Headers: Content-Type');
     }
 
     /**
@@ -17,7 +17,7 @@ class Http {
      * @param string $charset
      */
     static function setHeaderJson(string $charset = 'utf-8') {
-        @header("Content-Type: application/json; charset=$charset");
+        header("Content-Type: application/json; charset=$charset");
     }
 
     /**
@@ -26,7 +26,7 @@ class Http {
      * @param string $charset
      */
     static function setHeaderHtml(string $charset = 'utf-8') {
-        @header("Content-Type: text/html; charset=$charset");
+        header("Content-Type: text/html; charset=$charset");
     }
 
     /**
@@ -35,7 +35,7 @@ class Http {
      * @param string $charset
      */
     static function setHeaderXml(string $charset = 'utf-8') {
-        @header("Content-Type: text/xml; charset=$charset");
+        header("Content-Type: text/xml; charset=$charset");
     }
 
     /**
@@ -44,7 +44,7 @@ class Http {
      * @param string $charset
      */
     static function setHeaderText(string $charset = 'utf-8') {
-        @header("Content-Type: text/plain; charset=$charset");
+        header("Content-Type: text/plain; charset=$charset");
     }
 
     /**
@@ -53,7 +53,7 @@ class Http {
      * @param string $charset
      */
     static function setHeaderJs(string $charset = 'utf-8') {
-        @header("Content-Type: text/javascript; charset=$charset");
+        header("Content-Type: text/javascript; charset=$charset");
     }
 
     /**
@@ -62,14 +62,14 @@ class Http {
      * @param string $charset
      */
     static function setHeaderCss(string $charset = 'utf-8') {
-        @header("Content-Type: text/css; charset=$charset");
+        header("Content-Type: text/css; charset=$charset");
     }
 
     /**
      * Set response header to PNG image
      */
     static function setHeaderPng(): void {
-        @header("Content-Type: image/png;");
+        header("Content-Type: image/png;");
     }
 
     /**
@@ -79,50 +79,50 @@ class Http {
      */
     static function setHeaderCache(int $ttl = 0): void {
         $ttl === 0 ?
-        @header("Cache-Control: no-cache") :
-        @header("Cache-Control: max-age=$ttl");
+        header("Cache-Control: no-cache") :
+        header("Cache-Control: max-age=$ttl");
     }
 
     /**
      * Prevent indexing by robots
      */
     static function noRobots(): void {
-        @header('X-Robots-Tag: noindex, nofollow');
+        header('X-Robots-Tag: noindex, nofollow');
     }
 
     /**
      * Set 404 Not Found response
      */
     static function set404(): void {
-        @header('HTTP/1.1 404 Not Found', true, 404);
+        header('HTTP/1.1 404 Not Found', true, 404);
     }
 
     /**
      * Set 403 Forbidden response
      */
     static function set403(): void {
-        @header('HTTP/1.1 403 Forbidden', true, 403);
+        header('HTTP/1.1 403 Forbidden', true, 403);
     }
 
     /**
      * Set 401 Unauthorized response
      */
     static function set401(): void {
-        @header('HTTP/1.1 401 Unauthorized', true, 401);
+        header('HTTP/1.1 401 Unauthorized', true, 401);
     }
 
     /**
      * Set 400 Bad Request response
      */
     static function set400(): void {
-        @header('HTTP/1.1 400 Bad Request', true, 400);
+        header('HTTP/1.1 400 Bad Request', true, 400);
     }
 
     /**
      * Set 200 OK response
      */
     static function set200(): void {
-        @header('HTTP/1.1 200 OK', true, 200);
+        header('HTTP/1.1 200 OK', true, 200);
     }
 
     /**
@@ -133,9 +133,9 @@ class Http {
      */
     static function redirect(string $url, bool $is301 = false): void {
         if ($is301) {
-            @header('HTTP/1.1 301 Moved Permanently');
+            header('HTTP/1.1 301 Moved Permanently');
         }
-        @header("Location: $url");
+        header("Location: $url");
         exit;
     }
 
@@ -143,7 +143,7 @@ class Http {
      * Reload the current page
      */
     static function refresh(): void {
-        @header("Refresh:0");
+        header("Refresh:0");
     }
 
     /**
@@ -157,7 +157,7 @@ class Http {
             $redir = "https://".
             $_SERVER['HTTP_HOST'].
             $_SERVER['REQUEST_URI'];
-            @header("Location:$redir");
+            header("Location:$redir");
             exit;
         }
     }
@@ -174,9 +174,9 @@ class Http {
         $filename = basename($path);
         $size = filesize($path);
 
-        @header("Content-Type: $mime");
-        @header("Content-Disposition: attachment; filename=\"$filename\"");
-        @header("Content-Length: $size");
+        header("Content-Type: $mime");
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header("Content-Length: $size");
         readfile($path);
         exit;
     }
@@ -185,11 +185,11 @@ class Http {
      * Clear browser cache
      */
     static function clearBrowserCache(): void {
-        @header('Pragma: no-cache');
-        @header('Cache: no-cache');
-        @header('Expires: Mon, 01 Jan 1970 00:00:00 GMT');
-        @header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-        @header("Cache-Control: post-check=0, pre-check=0", false);
+        header('Pragma: no-cache');
+        header('Cache: no-cache');
+        header('Expires: Mon, 01 Jan 1970 00:00:00 GMT');
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Cache-Control: post-check=0, pre-check=0", false);
     }
 
     /**
