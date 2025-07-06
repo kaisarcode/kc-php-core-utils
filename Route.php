@@ -38,8 +38,8 @@ class Route {
             if (preg_match_all("/^$patt$/", $path, $mtch)) {
                 $res = $cb($mtch);
                 if ($res === false) return;
-                if (is_string($res) || is_numeric($res)) echo $res;
-                elseif (is_array($res) || is_object($res)) echo json_encode($res, JSON_PRETTY_PRINT);
+                if (is_string($res) || is_numeric($res)) { echo $res; }
+                elseif (is_array($res) || is_object($res)) { echo json_encode($res, JSON_PRETTY_PRINT); }
                 self::$matched = true;
             }
         }

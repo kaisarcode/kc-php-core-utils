@@ -150,12 +150,12 @@ class Http {
      * Force HTTPS redirection
      */
     static function forceHttps(): void {
-        if (empty($_SERVER['HTTPS'] || $_SERVER['HTTPS']==='off')
-        && @fsockopen($_SERVER['HTTP_HOST'], 443, $e, $s, 1)) {
-            $redir = "https://".
-            $_SERVER['HTTP_HOST'].
-            $_SERVER['REQUEST_URI'];
-            header("Location:$redir");
+        if (
+            (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off') &&
+            @fsockopen($_SERVER['HTTP_HOST'], 443, $e, $s, 1)
+        ) {
+            $redir = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            header("Location: $redir");
             exit;
         }
     }
