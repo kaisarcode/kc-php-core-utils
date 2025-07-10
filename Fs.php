@@ -81,7 +81,7 @@ class Fs {
      * @param bool $append
      * @return bool
      */
-    static function write(string $file, string $contents, ?int $perms = null, bool $append = false): bool {
+    static function put(string $file, string $contents, ?int $perms = null, bool $append = false): bool {
         $perms = $perms ?? 0777;
         $dir = dirname($file);
         self::mkdirp($dir, $perms);
