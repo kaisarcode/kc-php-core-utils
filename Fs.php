@@ -87,7 +87,7 @@ class Fs {
         self::mkdirp($dir, $perms);
         $mode = $append ? FILE_APPEND : 0;
         $ok = file_put_contents($file, $contents, $mode) !== false;
-        $ok && chmod($file, $perms);
+        $ok && @chmod($file, $perms);
         return $ok;
     }
 }
